@@ -14,12 +14,25 @@ import { useAppDispatch, useAppSelector } from "../../hooks/store";
 import { Link, Typography } from "@mui/material";
 
 const MuiAlert = forwardRef<HTMLDivElement, any>((props, ref) => {
-  const { id, text, title, timeLimit } = props;
+  const { id, text, title, timeLimit, link } = props;
   const dispatch = useAppDispatch();
 
   const _handleClose = useCallback(
     () => dispatch(closeAlert({ alertId: id })),
     [id, dispatch]
+  );
+
+  const AlertChildren = () => (
+    <>
+      {title.length ? <AlertTitle>{title}</AlertTitle> : <React.Fragment />}
+      {text ? (
+        <Typography variant="body2" component="div">
+          {text}
+        </Typography>
+      ) : (
+        <React.Fragment />
+      )}
+    </>
   );
 
   useEffect(() => {
@@ -38,13 +51,18 @@ const MuiAlert = forwardRef<HTMLDivElement, any>((props, ref) => {
       {...props}
       onClose={_handleClose}
     >
-      {title.length ? <AlertTitle>{title}</AlertTitle> : <React.Fragment />}
-      {text ? (
-        <Typography variant="body2" component="div">
-          {text}
-        </Typography>
+      {link.length ? (
+        <Link
+          href={link}
+          underline="none"
+          color="white"
+          target="_blank"
+          variant="body2"
+        >
+          <AlertChildren />
+        </Link>
       ) : (
-        <React.Fragment />
+        <AlertChildren />
       )}
     </Alert>
   );
@@ -60,14 +78,7 @@ const AlertManager: FunctionComponent = (): ReactElement => {
   return (
     <Stack sx={{ position: "absolute", top: 10, right: 10 }} spacing={2}>
       {alerts.map((alert: AlertType) => {
-        const { id, link } = alert;
-        if (link.length) {
-          return (
-            <Link href={link} underline="none" target="_blank" variant="body2">
-              <MuiAlert key={id} {...alert} />
-            </Link>
-          );
-        }
+        const { id } = alert;
         return <MuiAlert key={id} {...alert} />;
       })}
     </Stack>
