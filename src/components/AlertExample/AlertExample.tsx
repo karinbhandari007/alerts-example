@@ -15,7 +15,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Alert, AlertType, openAlert } from "../../redux/alert/alert.slice";
 import { useAppDispatch } from "../../hooks/store";
 import { Paper, Typography } from "@mui/material";
-import styles from "./app-example.module.css";
+import styles from "./alert-example.module.css";
 
 const getUniqId = (): string => "id-" + new Date().getTime();
 
@@ -27,7 +27,7 @@ const AlertUI: FunctionComponent = (): ReactElement => {
     title: "",
     text: "",
     link: "",
-    timeLimit: 10000,
+    timeLimit: 10,
     type: "success",
   });
 
@@ -108,7 +108,7 @@ const AlertUI: FunctionComponent = (): ReactElement => {
           />
           <TextField
             id="alert-time-limit"
-            label="Time limit"
+            label="Time limit (Seconds)"
             defaultValue={alertDetails.timeLimit}
             onChange={(
               event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
