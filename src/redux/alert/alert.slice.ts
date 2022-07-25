@@ -25,7 +25,15 @@ export const alertSlice = createSlice({
   reducers: {
     openAlert: (state: AlertState, action: PayloadAction<Alert>) => {
       const existingAlerts = JSON.parse(JSON.stringify(state.list));
-      const newAlerts = [...existingAlerts, action.payload];
+      const newAlerts = [
+        ...existingAlerts,
+        {
+          ...action.payload,
+          timeLimit:
+            action.payload.timeLimit *
+            1000 /** Converting seconds to milliseconds */,
+        },
+      ];
       state = {
         list: newAlerts,
       };
