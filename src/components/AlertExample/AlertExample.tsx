@@ -1,3 +1,6 @@
+/**
+ * @description Stateless component: adds alert to the store.
+ */
 import React, {
   ChangeEvent,
   FunctionComponent,
@@ -17,6 +20,9 @@ import { useAppDispatch } from "../../hooks/store";
 import { Paper, Typography } from "@mui/material";
 import styles from "./alert-example.module.css";
 
+/**
+ * @returns unique id
+ */
 const getUniqId = (): string => "id-" + new Date().getTime();
 
 const AlertUI: FunctionComponent = (): ReactElement => {
