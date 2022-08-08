@@ -15,10 +15,16 @@ export type AlertState = {
   list: Alert[];
 };
 
+/**
+ * @description initial alert state
+ */
 const initialState: AlertState = {
   list: [],
 };
 
+/**
+ * @description creating alert slice
+ */
 export const alertSlice = createSlice({
   name: "alert",
   initialState,

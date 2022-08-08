@@ -7,6 +7,9 @@ import React, {
   ReactElement,
   useState,
 } from "react";
+/**
+ * MUI components
+ */
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -15,9 +18,15 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { Paper, Typography } from "@mui/material";
+/**
+ * Redux
+ */
 import { Alert, AlertType, openAlert } from "../../redux/alert/alert.slice";
 import { useAppDispatch } from "../../hooks/store";
-import { Paper, Typography } from "@mui/material";
+/**
+ * Styles
+ */
 import styles from "./alert-example.module.css";
 
 /**
@@ -28,6 +37,9 @@ const getUniqId = (): string => "id-" + new Date().getTime();
 const AlertUI: FunctionComponent = (): ReactElement => {
   const dispatch = useAppDispatch();
 
+  /**
+   * @description holds field values, later pushed to the store
+   */
   const [alertDetails, setAlertDetails] = useState<Alert>({
     id: getUniqId(),
     title: "",
@@ -37,6 +49,12 @@ const AlertUI: FunctionComponent = (): ReactElement => {
     type: "success",
   });
 
+  /**
+   * @param event
+   * @param input
+   * @description set's alert information from fields to local state
+   * later to be passed to store
+   */
   const _inputChangeHandler = (
     event:
       | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -71,8 +89,12 @@ const AlertUI: FunctionComponent = (): ReactElement => {
     }
   };
 
+  /**
+   * @description adds alert information to the store
+   */
   const _createAlerts = () =>
     dispatch(openAlert({ ...alertDetails, id: getUniqId() }));
+
   return (
     <Box
       component="form"
