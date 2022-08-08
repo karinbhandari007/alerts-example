@@ -23,6 +23,9 @@ export const alertSlice = createSlice({
   name: "alert",
   initialState,
   reducers: {
+    /**
+     * @description appends alert to the existing alert list
+     */
     openAlert: (state: AlertState, action: PayloadAction<Alert>) => {
       const existingAlerts = JSON.parse(JSON.stringify(state.list));
       const newAlerts = [
@@ -39,6 +42,9 @@ export const alertSlice = createSlice({
       };
       return state;
     },
+    /**
+     * @description removes alert from alert list based on provided alert id
+     */
     closeAlert: (
       state: AlertState,
       action: PayloadAction<{ alertId: string }>

@@ -1,3 +1,6 @@
+/**
+ * @description Stateless component: displays all active Alerts.
+ */
 import React, {
   forwardRef,
   FunctionComponent,
